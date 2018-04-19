@@ -13,7 +13,7 @@ import com.ctsig.base.vo.ResultVO;
 public class ResultVoUtil {
 
     public static ResultVO success(Object object) {
-        ResultVO resultVO = new ResultVO(ResultEnum.SUCCESS, object);
+        ResultVO resultVO = new ResultVO(ResultEnum.Success, object);
         return resultVO;
     }
 

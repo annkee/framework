@@ -70,7 +70,7 @@ public class HttpClientUtil {
      *
      * @param url
      * @param params
-     * @return
+     * @return String
      */
     public static String get(String url, Map<String, Object> params) {
         URIBuilder uriBuilder = new URIBuilder();
@@ -94,7 +94,7 @@ public class HttpClientUtil {
      * @param url
      * @param headers
      * @param params
-     * @return
+     * @return String
      */
     public static String get(String url, Map<String, Object> headers, Map<String, Object> params) {
         URIBuilder uriBuilder = new URIBuilder();
@@ -122,7 +122,7 @@ public class HttpClientUtil {
      * 普通post请求
      *
      * @param url
-     * @return
+     * @return String
      */
     public static String post(String url) {
         HttpPost httpPost = new HttpPost(url);
@@ -231,7 +231,7 @@ public class HttpClientUtil {
      *
      * @param url
      * @param files
-     * @return
+     * @return String
      */
     public static String upload(String url, List<File> files) {
         if (files == null || files.size() == 0) {
@@ -254,7 +254,7 @@ public class HttpClientUtil {
      * @param url
      * @param headers
      * @param files
-     * @return
+     * @return String
      */
     public static String upload(String url, Map<String, Object> headers, List<File> files) {
         if (files == null || files.size() == 0) {
@@ -283,7 +283,7 @@ public class HttpClientUtil {
      * @param headers 头文件非必须，不设置传null
      * @param params  参数非必须，不设置传null
      * @param files   必须
-     * @return
+     * @return String
      */
     public static String upload(String url, Map<String, Object> headers, Map<String, Object> params, List<File> files) {
         if (files == null || files.size() == 0) {
@@ -331,7 +331,7 @@ public class HttpClientUtil {
      * 请求结果处理
      *
      * @param request
-     * @return
+     * @return String
      */
     private static String httpResult(HttpRequestBase request) {
 
@@ -364,7 +364,7 @@ public class HttpClientUtil {
     /**
      * 创建HttpClient
      *
-     * @return
+     * @return CloseableHttpClient
      */
     public static CloseableHttpClient createHttpClient() {
 
