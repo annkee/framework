@@ -7,7 +7,6 @@ import com.ctsig.base.exception.BaseException;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.*;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -33,7 +32,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
 import java.io.File;
@@ -153,30 +151,19 @@ public class HttpClientUtil {
             entity.setContentEncoding("UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
-            System.out.println("executing request " + httpPost.getURI());
             CloseableHttpResponse response = httpclient.execute(httpPost);
-            try {
-                HttpEntity httpEntity = response.getEntity();
-                if (entity != null) {
-                    result = EntityUtils.toString(httpEntity, "UTF-8");
-                }
-            } finally {
-                response.close();
+            HttpEntity httpEntity = response.getEntity();
+            if (entity != null) {
+                result = EntityUtils.toString(httpEntity, "UTF-8");
             }
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e1) {
-            e1.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+            response.close();
             // 关闭连接,释放资源
-            try {
-                httpclient.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            httpclient.close();
+        } catch (IOException e) {
+            log.error("post error: e={}", e.getMessage());
+            throw new BaseException(ResultEnum.IOException);
         }
+
         return result;
     }
 
@@ -394,26 +381,23 @@ public class HttpClientUtil {
         connectionManager.setDefaultMaxPerRoute(ProgramConst.DEFAULT_MAX_PRR_ROUTE);
 
         // 请求重试处理
-        HttpRequestRetryHandler httpRequestRetryHandler = new HttpRequestRetryHandler() {
-            @Override
-            public boolean retryRequest(IOException exception, int executionCount, HttpContext context) {
-                if (executionCount >= ProgramConst.EXECUTION_NUM) {
-                    return false;
-                }
-                // 连接丢失，重试
-                if (exception instanceof NoHttpResponseException) {
-                    return true;
-                }
-
-                HttpClientContext clientContext = HttpClientContext.adapt(context);
-                HttpRequest request = clientContext.getRequest();
-
-                // 请求幂等，再次尝试
-                if (!(request instanceof HttpEntityEnclosingRequest)) {
-                    return true;
-                }
+        HttpRequestRetryHandler httpRequestRetryHandler = (exception, executionCount, context) -> {
+            if (executionCount >= ProgramConst.EXECUTION_NUM) {
                 return false;
             }
+            // 连接丢失，重试
+            if (exception instanceof NoHttpResponseException) {
+                return true;
+            }
+
+            HttpClientContext clientContext = HttpClientContext.adapt(context);
+            HttpRequest request = clientContext.getRequest();
+
+            // 请求幂等，再次尝试
+            if (!(request instanceof HttpEntityEnclosingRequest)) {
+                return true;
+            }
+            return false;
         };
 
         CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(connectionManager)
