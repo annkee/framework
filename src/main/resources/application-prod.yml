@@ -1,0 +1,19 @@
+server:
+  port: 2018
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/sell?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: root
+    password: wangan
+  jpa:
+    show-sql: true
+  jmx:
+    default-domain: myframework
+  application:
+    name: myframework
+
+# 指定log配置文件
+logging:
+  config: classpath:logback.xml
