@@ -1,4 +1,4 @@
-package com.ctsig.base.utils;
+package com.ctsig.base.util;
 
 import com.ctsig.order.domain.Order;
 import com.ctsig.order.dto.OrderDTO;

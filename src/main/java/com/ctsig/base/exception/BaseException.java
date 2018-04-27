@@ -1,6 +1,6 @@
 package com.ctsig.base.exception;
 
-import com.ctsig.base.enums.ResultEnum;
+import com.ctsig.base.enums.ResultCodeEnum;
 import lombok.Data;
 
 /**
@@ -12,15 +12,15 @@ import lombok.Data;
 @Data
 public class BaseException extends RuntimeException {
 
-    private ResultEnum resultEnum;
+    private ResultCodeEnum resultCodeEnum;
 
-    public BaseException(ResultEnum resultEnum) {
-        super(resultEnum.getMessage());
-        this.resultEnum = resultEnum;
+    public BaseException(ResultCodeEnum resultCodeEnum) {
+        super(resultCodeEnum.getMessage());
+        this.resultCodeEnum = resultCodeEnum;
     }
 
-    public ResultEnum getResultEnum() {
-        return resultEnum;
+    public ResultCodeEnum getResultCodeConstant() {
+        return resultCodeEnum;
     }
 
 

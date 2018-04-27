@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.ctsig</groupId>
     <artifactId>myframework</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0_Alpha</version>
     <packaging>pom</packaging>
 
     <properties>

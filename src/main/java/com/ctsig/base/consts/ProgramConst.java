@@ -9,7 +9,7 @@ package com.ctsig.base.consts;
 public class ProgramConst {
 
     /**
-     * redis相关常量
+     * redis
      */
     public static final String NX = "NX";
     public static final String EX = "EX";
@@ -20,30 +20,14 @@ public class ProgramConst {
     public static final int JSON = 1;
     public static final int XML = 2;
 
-
     /**
-     * 响应超时时间
+     * http
      */
-    public static final int TIME_OUT = 2000;
-    /**
-     * 连接超时时间
-     */
-    public static final int CONNECT_TIME_OUT = 1000;
-
-    /**
-     * 请求重试次数
-     */
-    public static final int EXECUTION_NUM = 2;
-
-    /**
-     * 最大连接数
-     */
-    public static final int MAX_TOTAL = 200;
-
-    /**
-     * 每个路由最大连接数
-     */
-    public static final int DEFAULT_MAX_PRR_ROUTE = 100;
+    public static final int HTTP_RESPONSE_TIME_OUT = 2000;
+    public static final int HTTP_CONNECT_TIME_OUT = 1000;
+    public static final int HTTP_CONNECT_RETRY_NUM = 2;
+    public static final int HTTP_MAX_CONNECT_NUM = 200;
+    public static final int HTTP_ROUTE_MAX_CONNECT_NUM = 100;
 
 
 }

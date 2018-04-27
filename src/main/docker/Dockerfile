@@ -2,10 +2,10 @@
 # （指定基础image）
 # 构建指令，必须指定且需要在Dockerfile其他指令的前面。后续的指令都依赖于该指令指定的image
 # FROM指令指定的基础image可以是官方远程仓库中的，也可以位于本地仓库
-FROM 192.168.8.128/smartmall/java:8u20
+FROM 192.168.8.12/smartmall/java:8u20
 
 # 记录相关人员信息
-MAINTAINER zhouxra ctsig "zhouxra@ctsig.com"
+MAINTAINER houxra ctsig "houxra@ctsig.com"
 
 # 在image中设置环境变量
 ENV WORK_PATH /home/root

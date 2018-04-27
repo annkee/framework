@@ -7,7 +7,7 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder charset="UTF-8" class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <!--格式化输出，%d：日期，%thread：线程名，%-5level：级别从左显示5个字符宽度，%msg：日志消息，%n：换行符 -->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] [%-5level] %logger{50} - %msg%n</pattern>
+            <pattern>%highlight(%d{yyyy-MM-dd HH:mm:ss}) [%thread] %highlight([%level]) %cyan(%logger{50}) - %highlight(%msg) %n</pattern>
         </encoder>
     </appender>
 

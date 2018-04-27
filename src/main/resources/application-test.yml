@@ -17,6 +17,7 @@ spring:
 # 指定log配置文件
 logging:
   config: classpath:logback.xml
+  level: debug
 # 请求服务器返回的key中值为null的话就不返回此key
 #  jackson:
 #    default-property-inclusion: non_null

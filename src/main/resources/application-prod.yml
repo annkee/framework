@@ -17,3 +17,4 @@ spring:
 # 指定log配置文件
 logging:
   config: classpath:logback.xml
+  level: debug

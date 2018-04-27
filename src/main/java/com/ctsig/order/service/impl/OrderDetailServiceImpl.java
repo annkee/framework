@@ -1,6 +1,6 @@
 package com.ctsig.order.service.impl;
 
-import com.ctsig.base.utils.OrderDetail2OrderDTO;
+import com.ctsig.base.util.OrderDetail2OrderDTO;
 import com.ctsig.order.dao.OrderDetailDao;
 import com.ctsig.order.domain.OrderDetail;
 import com.ctsig.order.dto.OrderDTO;

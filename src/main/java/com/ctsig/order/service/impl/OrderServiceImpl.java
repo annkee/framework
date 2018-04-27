@@ -1,9 +1,9 @@
 package com.ctsig.order.service.impl;
 
-import com.ctsig.base.enums.ResultEnum;
+import com.ctsig.base.enums.ResultCodeEnum;
 import com.ctsig.base.exception.BaseException;
-import com.ctsig.base.utils.KeyUtil;
-import com.ctsig.base.utils.Order2OrderDTO;
+import com.ctsig.base.util.KeyUtil;
+import com.ctsig.base.util.Order2OrderDTO;
 import com.ctsig.order.dao.OrderDao;
 import com.ctsig.order.dao.OrderDetailDao;
 import com.ctsig.order.domain.Order;
@@ -95,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
             order = orderDao.findById(orderId);
         } catch (Exception e) {
             log.error("findOrder error: e={}", e.getMessage());
-            throw new BaseException(ResultEnum.SQLException);
+            throw new BaseException(ResultCodeEnum.SQLException);
         }
 
         Page<OrderDetail> detailPage = orderDetailDao.findByOrderId(orderId, null);
@@ -130,7 +130,7 @@ public class OrderServiceImpl implements OrderService {
                 return save;
             } catch (Exception e) {
                 log.error("update error: e={}", e.getMessage());
-                throw new BaseException(ResultEnum.SQLException);
+                throw new BaseException(ResultCodeEnum.SQLException);
             }
 
 

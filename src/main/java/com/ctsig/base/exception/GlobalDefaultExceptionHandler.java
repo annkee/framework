@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class GlobalDefaultExceptionHandler {
 
-
     @ExceptionHandler(BaseException.class)
-    public ResultVO handleException(BaseException base) {
+    public ResultVO handleException(BaseException e) {
 
-        return new ResultVO(base.getResultEnum());
+        log.info("handleException: e={}", e.getMessage());
+
+        return new ResultVO(e.getResultCodeConstant());
     }
 
 }

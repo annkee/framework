@@ -1,8 +1,8 @@
-package com.ctsig.base.utils;
+package com.ctsig.base.util;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ctsig.base.consts.ProgramConst;
-import com.ctsig.base.enums.ResultEnum;
+import com.ctsig.base.enums.ResultCodeEnum;
 import com.ctsig.base.exception.BaseException;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
@@ -81,7 +81,7 @@ public class HttpClientUtil {
             build = uriBuilder.build();
         } catch (URISyntaxException e) {
             log.error("build error: e={}", e.getMessage());
-            throw new BaseException(ResultEnum.UriBuilderException);
+            throw new BaseException(ResultCodeEnum.UriBuilderException);
         }
         HttpGet httpGet = new HttpGet(build);
         return httpResult(httpGet);
@@ -105,7 +105,7 @@ public class HttpClientUtil {
             build = uriBuilder.build();
         } catch (URISyntaxException e) {
             log.error("build error: e={}", e.getMessage());
-            throw new BaseException(ResultEnum.UriBuilderException);
+            throw new BaseException(ResultCodeEnum.UriBuilderException);
         }
         HttpGet httpGet = new HttpGet(build);
         if (headers != null && headers.size() > 0) {
@@ -161,7 +161,7 @@ public class HttpClientUtil {
             httpclient.close();
         } catch (IOException e) {
             log.error("post error: e={}", e.getMessage());
-            throw new BaseException(ResultEnum.IOException);
+            throw new BaseException(ResultCodeEnum.IOException);
         }
 
         return result;
@@ -209,7 +209,7 @@ public class HttpClientUtil {
 
         if (bool) {
             log.error("postJsonOrXml error: type={}, url={}, param={}", type, url, param);
-            throw new BaseException(ResultEnum.ParamError);
+            throw new BaseException(ResultCodeEnum.ParamError);
         }
         HttpPost httpPost = new HttpPost(url);
         StringEntity stringEntity = null;
@@ -339,8 +339,8 @@ public class HttpClientUtil {
         CloseableHttpClient httpClient = createHttpClient();
 
         //配置超时时间
-        RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(ProgramConst.CONNECT_TIME_OUT)
-                .setConnectTimeout(ProgramConst.CONNECT_TIME_OUT).setSocketTimeout(ProgramConst.TIME_OUT).build();
+        RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(ProgramConst.HTTP_CONNECT_TIME_OUT)
+                .setConnectTimeout(ProgramConst.HTTP_CONNECT_TIME_OUT).setSocketTimeout(ProgramConst.HTTP_RESPONSE_TIME_OUT).build();
         request.setConfig(requestConfig);
 
         CloseableHttpResponse response;
@@ -355,7 +355,7 @@ public class HttpClientUtil {
             }
         } catch (IOException e) {
             log.error("httpResult error: e={}", e.getMessage());
-            throw new BaseException(ResultEnum.HttpConnectTimeOut);
+            throw new BaseException(ResultCodeEnum.HttpConnectTimeOut);
         }
         return result;
     }
@@ -375,14 +375,14 @@ public class HttpClientUtil {
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(registry);
 
         // 最大连接数
-        connectionManager.setMaxTotal(ProgramConst.MAX_TOTAL);
+        connectionManager.setMaxTotal(ProgramConst.HTTP_MAX_CONNECT_NUM);
 
         // 每个路由基础的连接
-        connectionManager.setDefaultMaxPerRoute(ProgramConst.DEFAULT_MAX_PRR_ROUTE);
+        connectionManager.setDefaultMaxPerRoute(ProgramConst.HTTP_ROUTE_MAX_CONNECT_NUM);
 
         // 请求重试处理
         HttpRequestRetryHandler httpRequestRetryHandler = (exception, executionCount, context) -> {
-            if (executionCount >= ProgramConst.EXECUTION_NUM) {
+            if (executionCount >= ProgramConst.HTTP_CONNECT_RETRY_NUM) {
                 return false;
             }
             // 连接丢失，重试

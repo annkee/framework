@@ -1,9 +1,9 @@
 package com.ctsig.api;
 
 
-import com.ctsig.base.enums.ResultEnum;
+import com.ctsig.base.enums.ResultCodeEnum;
 import com.ctsig.base.exception.BaseException;
-import com.ctsig.base.utils.ResultVoUtil;
+import com.ctsig.base.util.ResultVoUtil;
 import com.ctsig.base.vo.ResultVO;
 import com.ctsig.order.domain.Order;
 import com.ctsig.order.dto.OrderDTO;
@@ -22,7 +22,7 @@ import java.util.List;
 
 
 /**
- * 订单接口控制器
+ * 订单接口
  *
  * @author wangan
  * @date 2018/01/05
@@ -68,7 +68,7 @@ public class OrderController {
     public ResultVO<OrderDTO> orderInfo(@ApiParam(value = "订单id，如：18010893383") @RequestParam(value = "orderId", required = false) Long orderId) {
         if (orderId == null) {
             log.error("orderInfo param error: orderId={}", orderId);
-            throw new BaseException(ResultEnum.ParamError);
+            throw new BaseException(ResultCodeEnum.ParamError);
         }
         OrderDTO order = orderService.findOrder(orderId);
 
@@ -93,7 +93,7 @@ public class OrderController {
         if (StringUtils.isEmpty(status)) {
 
             log.error("orderList param error: status={}, page={}, size={}", status, page, size);
-            throw new BaseException(ResultEnum.ParamError);
+            throw new BaseException(ResultCodeEnum.ParamError);
         }
 
         return ResultVoUtil.success(orderService.findList(status, page, size));
@@ -116,7 +116,7 @@ public class OrderController {
         if (StringUtils.isEmpty(orderId)) {
 
             log.error("orderDetailList param error: orderId={}, page={}, size={}", orderId, page, size);
-            throw new BaseException(ResultEnum.ParamError);
+            throw new BaseException(ResultCodeEnum.ParamError);
         }
 
         Page<OrderDTO> orderDTOPage = orderDetailService.findList(orderId, new PageRequest(page, size));
@@ -138,12 +138,12 @@ public class OrderController {
 
         if (StringUtils.isEmpty(status)) {
             log.error("updateStatus param error: orderId={}, status={}", orderId, status);
-            throw new BaseException(ResultEnum.ParamError);
+            throw new BaseException(ResultCodeEnum.ParamError);
         }
         Order order = orderService.update(orderId, status);
 
         if (order == null) {
-            return ResultVoUtil.error(ResultEnum.OrderNotExist.getCode(), ResultEnum.OrderNotExist.getMessage());
+            return ResultVoUtil.error(ResultCodeEnum.OrderNotExist.getCode(), ResultCodeEnum.OrderNotExist.getMessage());
         } else {
             return ResultVoUtil.success();
         }

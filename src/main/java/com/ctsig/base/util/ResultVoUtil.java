@@ -1,6 +1,6 @@
-package com.ctsig.base.utils;
+package com.ctsig.base.util;
 
-import com.ctsig.base.enums.ResultEnum;
+import com.ctsig.base.enums.ResultCodeEnum;
 import com.ctsig.base.vo.ResultVO;
 
 
@@ -13,7 +13,7 @@ import com.ctsig.base.vo.ResultVO;
 public class ResultVoUtil {
 
     public static ResultVO success(Object object) {
-        ResultVO resultVO = new ResultVO(ResultEnum.Success, object);
+        ResultVO resultVO = new ResultVO(ResultCodeEnum.Success, object);
         return resultVO;
     }
 

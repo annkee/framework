@@ -1,17 +1,19 @@
 package com.ctsig.base.filter;
 
+import org.springframework.context.annotation.Configuration;
+
 import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 过滤器
+ * 过滤器，跨域配置header
  *
  * @author wangan
  * @date 2017/8/9
  */
-public class CorsFilter implements Filter {
+@Configuration
+public class CrossDomainFilter implements Filter {
 
     /**
      * 跨域请求过滤
@@ -25,7 +27,6 @@ public class CorsFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");

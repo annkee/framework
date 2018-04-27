@@ -1,6 +1,6 @@
 package com.ctsig.base.vo;
 
-import com.ctsig.base.enums.ResultEnum;
+import com.ctsig.base.enums.ResultCodeEnum;
 import lombok.Data;
 
 /**
@@ -30,13 +30,13 @@ public class ResultVO<T> {
     public ResultVO() {
     }
 
-    public ResultVO(ResultEnum resultEnum, T data) {
-        this(resultEnum);
+    public ResultVO(ResultCodeEnum resultCodeEnum, T data) {
+        this(resultCodeEnum);
         this.data = data;
     }
 
-    public ResultVO(ResultEnum resultEnum) {
-        this.code = resultEnum.getCode();
-        this.message = resultEnum.getMessage();
+    public ResultVO(ResultCodeEnum resultCodeEnum) {
+        this.code = resultCodeEnum.getCode();
+        this.message = resultCodeEnum.getMessage();
     }
 }

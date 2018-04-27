@@ -10,7 +10,7 @@ import lombok.Getter;
  * @date 2018/1/4
  */
 @Getter
-public enum ResultEnum {
+public enum ResultCodeEnum {
 
 
     Success(200, "成功"),
@@ -26,7 +26,7 @@ public enum ResultEnum {
     HttpConnectTimeOut(503010, "http请求连接超时"),
 
     UriBuilderException(503011, "构建URI异常"),
-
+    RedisException(504018, "redis 异常"),
     SystemException(504, "系统异常"),
     NullPointerException(504002, "输入错误，缺少输入值"),
     ClassCastException(504003, "系统异常：类型转换错误"),
@@ -38,10 +38,9 @@ public enum ResultEnum {
     NumberFormatException(504007, "系统异常：输入数字错误"),;
 
     private Integer code;
-
     private String message;
 
-    ResultEnum(Integer code, String message) {
+    ResultCodeEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
