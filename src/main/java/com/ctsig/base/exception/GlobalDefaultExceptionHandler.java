@@ -20,7 +20,7 @@ public class GlobalDefaultExceptionHandler {
     @ExceptionHandler(BaseException.class)
     public ResultVO handleException(BaseException e) {
 
-        log.info("handleException: e={}", e.getMessage());
+        log.error("handleException: e={}", e.getMessage());
 
         return new ResultVO(e.getResultCodeConstant());
     }
