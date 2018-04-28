@@ -14,7 +14,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <swagger.version>2.7.0</swagger.version>
         <druid.version>1.0.26</druid.version>
         <jdk.version>1.8</jdk.version>
