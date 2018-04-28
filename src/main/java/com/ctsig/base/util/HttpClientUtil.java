@@ -1,7 +1,7 @@
 package com.ctsig.base.util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ctsig.base.consts.ProgramConst;
+import com.ctsig.base.constant.ProjectConstant;
 import com.ctsig.base.enums.ResultCodeEnum;
 import com.ctsig.base.exception.BaseException;
 import com.google.common.base.Strings;
@@ -213,11 +213,11 @@ public class HttpClientUtil {
         }
         HttpPost httpPost = new HttpPost(url);
         StringEntity stringEntity = null;
-        if (type == ProgramConst.JSON) {
+        if (type == ProjectConstant.JSON) {
 
             stringEntity = new StringEntity(param, ContentType.create("application/json",
                     "UTF-8"));
-        } else if (type == ProgramConst.XML) {
+        } else if (type == ProjectConstant.XML) {
             stringEntity = new StringEntity(param, ContentType.create("application/xml",
                     "UTF-8"));
         }
@@ -339,8 +339,8 @@ public class HttpClientUtil {
         CloseableHttpClient httpClient = createHttpClient();
 
         //配置超时时间
-        RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(ProgramConst.HTTP_CONNECT_TIME_OUT)
-                .setConnectTimeout(ProgramConst.HTTP_CONNECT_TIME_OUT).setSocketTimeout(ProgramConst.HTTP_RESPONSE_TIME_OUT).build();
+        RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(ProjectConstant.HTTP_CONNECT_TIME_OUT)
+                .setConnectTimeout(ProjectConstant.HTTP_CONNECT_TIME_OUT).setSocketTimeout(ProjectConstant.HTTP_RESPONSE_TIME_OUT).build();
         request.setConfig(requestConfig);
 
         CloseableHttpResponse response;
@@ -375,14 +375,14 @@ public class HttpClientUtil {
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(registry);
 
         // 最大连接数
-        connectionManager.setMaxTotal(ProgramConst.HTTP_MAX_CONNECT_NUM);
+        connectionManager.setMaxTotal(ProjectConstant.HTTP_MAX_CONNECT_NUM);
 
         // 每个路由基础的连接
-        connectionManager.setDefaultMaxPerRoute(ProgramConst.HTTP_ROUTE_MAX_CONNECT_NUM);
+        connectionManager.setDefaultMaxPerRoute(ProjectConstant.HTTP_ROUTE_MAX_CONNECT_NUM);
 
         // 请求重试处理
         HttpRequestRetryHandler httpRequestRetryHandler = (exception, executionCount, context) -> {
-            if (executionCount >= ProgramConst.HTTP_CONNECT_RETRY_NUM) {
+            if (executionCount >= ProjectConstant.HTTP_CONNECT_RETRY_NUM) {
                 return false;
             }
             // 连接丢失，重试

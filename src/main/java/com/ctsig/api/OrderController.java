@@ -143,7 +143,7 @@ public class OrderController {
         Order order = orderService.update(orderId, status);
 
         if (order == null) {
-            return ResultVoUtil.error(ResultCodeEnum.OrderNotExist.getCode(), ResultCodeEnum.OrderNotExist.getMessage());
+            return ResultVoUtil.error(ResultCodeEnum.OrderNotExist);
         } else {
             return ResultVoUtil.success();
         }

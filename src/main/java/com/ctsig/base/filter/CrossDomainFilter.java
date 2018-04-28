@@ -10,7 +10,7 @@ import java.io.IOException;
  * 过滤器，跨域配置header
  *
  * @author wangan
- * @date 2017/8/9
+ * @date 2017/08/09
  */
 @Configuration
 public class CrossDomainFilter implements Filter {

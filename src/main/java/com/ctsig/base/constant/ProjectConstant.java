@@ -1,4 +1,4 @@
-package com.ctsig.base.consts;
+package com.ctsig.base.constant;
 
 /**
  * 常量类
@@ -6,7 +6,7 @@ package com.ctsig.base.consts;
  * @author wangan
  * @date 2018/3/21
  */
-public class ProgramConst {
+public class ProjectConstant {
 
     /**
      * redis

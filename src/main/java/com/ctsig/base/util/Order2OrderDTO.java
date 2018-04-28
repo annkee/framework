@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * 数据格式处理
  *
  * @author wangan
- * @date 2018/1/8
+ * @date 2018/01/08
  */
 public class Order2OrderDTO {
 
@@ -26,4 +26,6 @@ public class Order2OrderDTO {
 
         return orderList.stream().map(e -> convert(e)).collect(Collectors.toList());
     }
+
+
 }

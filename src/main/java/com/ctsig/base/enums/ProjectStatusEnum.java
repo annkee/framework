@@ -7,7 +7,7 @@ import lombok.Getter;
  * @date 2018/4/27
  */
 @Getter
-public enum ProgramStatusEnum {
+public enum ProjectStatusEnum {
 
     /**
      * 订单
@@ -26,7 +26,7 @@ public enum ProgramStatusEnum {
     private Integer code;
     private String message;
 
-    ProgramStatusEnum(Integer code, String message) {
+    ProjectStatusEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

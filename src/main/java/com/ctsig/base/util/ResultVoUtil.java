@@ -21,10 +21,8 @@ public class ResultVoUtil {
         return success(null);
     }
 
-    public static ResultVO error(Integer code, String message) {
-        ResultVO resultVO = new ResultVO();
-        resultVO.setCode(code);
-        resultVO.setMessage(message);
+    public static ResultVO error(ResultCodeEnum resultCodeEnum) {
+        ResultVO resultVO = new ResultVO(resultCodeEnum);
         return resultVO;
     }
 
