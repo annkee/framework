@@ -5,7 +5,6 @@ import com.ctsig.base.exception.BaseException;
 import com.ctsig.base.util.KeyUtil;
 import com.ctsig.base.util.Order2OrderDTO;
 import com.ctsig.order.dao.OrderDao;
-import com.ctsig.order.dao.OrderDetailDao;
 import com.ctsig.order.domain.Order;
 import com.ctsig.order.domain.OrderDetail;
 import com.ctsig.order.dto.OrderDTO;
@@ -73,12 +72,6 @@ public class OrderServiceImpl implements OrderService {
         Page<Order> orderPage = orderDao.findAll(pageable);
         List<Order> orderList = orderPage.getContent();
         List<OrderDTO> orderDTOList = Order2OrderDTO.convert(orderList);
-        for (OrderDTO orderDTO : orderDTOList) {
-
-            Page<OrderDetail> detailPage = orderDetailDao.findByOrderId(orderDTO.getId(), null);
-            orderDTO.setOrderDetailList(detailPage.getContent());
-
-        }
 
         return orderDTOList;
     }

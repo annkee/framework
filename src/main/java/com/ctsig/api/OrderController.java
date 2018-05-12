@@ -56,25 +56,6 @@ public class OrderController {
 
 
     /**
-     * 获取订单信息
-     *
-     * @param orderId 订单id
-     * @return ResultVO<Order>
-     */
-    @GetMapping("/info")
-    @ApiOperation(value = "获取订单信息", notes = "无需提示")
-    public ResultVO<OrderDTO> orderInfo(@ApiParam(value = "订单id，如：18010893383") @RequestParam(value = "orderId", required = false) Long orderId) {
-        if (orderId == null) {
-            log.error("orderInfo param error: orderId={}", orderId);
-            throw new BaseException(ResultCodeEnum.ParamError);
-        }
-        OrderDTO order = orderService.findOrder(orderId);
-
-        return ResultVoUtil.success(order);
-    }
-
-
-    /**
      * 根据条件获取订单列表
      *
      * @param status 订单状态

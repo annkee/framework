@@ -32,14 +32,6 @@ public interface OrderService {
     Order update(Long orderId, String status);
 
     /**
-     * 查询订单信息
-     *
-     * @param orderId
-     * @return OrderDTO
-     */
-    OrderDTO findOrder(Long orderId);
-
-    /**
      * 查询订单列表
      *
      * @param status
