@@ -1,7 +1,7 @@
 <configuration scan="true" scanPeriod="600 seconds" debug="false">
 
     <!--定义日志文件的存储地址 勿在 logback 的配置中使用相对路径 -->
-    <property name="LOG_HOME" value="/logs/myframework"/>
+    <property name="LOG_HOME" value="./logs/myframework"/>
 
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">

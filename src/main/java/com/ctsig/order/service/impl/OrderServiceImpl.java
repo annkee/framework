@@ -36,9 +36,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDao orderDao;
 
-    @Autowired
-    private OrderDetailDao orderDetailDao;
-
     @Override
     @Transactional(rollbackFor = BaseException.class)
     public OrderDTO createOrder(OrderDTO orderDTO) {
@@ -51,7 +48,6 @@ public class OrderServiceImpl implements OrderService {
             //1.订单详情入库
             orderDetail.setId(KeyUtil.genUniqueKey());
             orderDetail.setOrderId(orderId);
-            orderDetailDao.save(orderDetail);
             orderAmount += orderDetail.getProductCount() * orderDetail.getProductAmount();
             discountAmount += orderDetail.getProductDiscountAmount();
         }
@@ -87,26 +83,6 @@ public class OrderServiceImpl implements OrderService {
         return orderDTOList;
     }
 
-    @Override
-    public OrderDTO findOrder(Long orderId) {
-        Order order;
-        try {
-
-            order = orderDao.findById(orderId);
-        } catch (Exception e) {
-            log.error("findOrder error: e={}", e.getMessage());
-            throw new BaseException(ResultCodeEnum.SQLException);
-        }
-
-        Page<OrderDetail> detailPage = orderDetailDao.findByOrderId(orderId, null);
-        OrderDTO orderDTO = new OrderDTO();
-        BeanUtils.copyProperties(order, orderDTO);
-
-        orderDTO.setOrderDetailList(detailPage.getContent());
-        return orderDTO;
-
-
-    }
 
     /**
      * Transactional 注解异常回滚操作

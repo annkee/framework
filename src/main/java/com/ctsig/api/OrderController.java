@@ -12,8 +12,6 @@ import com.ctsig.order.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -97,30 +95,6 @@ public class OrderController {
         }
 
         return ResultVoUtil.success(orderService.findList(status, page, size));
-    }
-
-    /**
-     * 获取订单详情列表
-     *
-     * @param orderId 订单id
-     * @param page    当前页 0是第一页
-     * @param size    大小
-     * @return ResultVO
-     */
-    @GetMapping("/detail/list")
-    @ApiOperation(value = "获取订单详情列表", notes = "无需提示")
-    public ResultVO<List<OrderDTO>> orderDetailList(@ApiParam(value = "订单id，如：18010893383") @RequestParam(value = "orderId") Long orderId,
-                                                    @ApiParam(value = "当前页，如：1") @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                    @ApiParam(value = "每页大小，如：10") @RequestParam(value = "size", defaultValue = "10") Integer size) {
-
-        if (StringUtils.isEmpty(orderId)) {
-
-            log.error("orderDetailList param error: orderId={}, page={}, size={}", orderId, page, size);
-            throw new BaseException(ResultCodeEnum.ParamError);
-        }
-
-        Page<OrderDTO> orderDTOPage = orderDetailService.findList(orderId, new PageRequest(page, size));
-        return ResultVoUtil.success(orderDTOPage.getContent());
     }
 
 

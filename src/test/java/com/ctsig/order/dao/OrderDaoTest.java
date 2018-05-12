@@ -27,7 +27,7 @@ public class OrderDaoTest {
     private OrderDao orderDao;
 
     /**
-     * javax.transaction.Transactional 事物回滚
+     * javax.transaction.Transactional 测试用例事物回滚
      *
      * @throws Exception
      */
@@ -48,5 +48,6 @@ public class OrderDaoTest {
         logger.info("hello");
         LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
         StatusPrinter.print(loggerContext);
+
     }
 }
